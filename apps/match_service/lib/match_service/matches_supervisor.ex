@@ -6,8 +6,8 @@ defmodule MatchService.MatchesSupervisor do
 
   # API
 
-  def create_match() do
-    DynamicSupervisor.start_child(@name, MatchServer)
+  def create_match(owner) do
+    DynamicSupervisor.start_child(@name, MatchServer.child_spec([owner: owner]))
   end
 
   # Supervision impl

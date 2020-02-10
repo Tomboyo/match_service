@@ -1,13 +1,13 @@
 defmodule MatchService.Match do
-  defstruct [:state]
+  defstruct [:state, :owner]
 
-  def open_match() do
-    %__MODULE__{ state: :open }
+  def create_match(owner) do
+    %__MODULE__{ state: :open, owner: owner }
   end
 
   def start_match(match) do
     if match.state == :open do
-      {:ok, %__MODULE__{ state: :running }}
+      {:ok, %{match | state: :running }}
     else
       {:error, "Match is not open"}
     end
@@ -15,7 +15,7 @@ defmodule MatchService.Match do
 
   def close_match(match) do
     if match.state == :running do
-      {:ok, %__MODULE__{ state: :closed }}
+      {:ok, %{match | state: :closed }}
     else
       {:error, "Match is not running"}
     end
