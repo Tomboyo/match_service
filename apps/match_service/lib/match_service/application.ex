@@ -3,7 +3,7 @@ defmodule MatchService.Application do
 
   def start(_type, _args) do
     children = [
-      {MatchService.MatchesSupervisor, []},
+      MatchService.MatchesSupervisor
     ]
 
     Supervisor.start_link(children, name: __MODULE__, strategy: :one_for_one)
